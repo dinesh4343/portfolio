@@ -2,11 +2,12 @@
 import './App.css';
 import Footer from './Js/Footer';
 import StarrySky from './StarrySky';
-import Navbar from './Js/Navbar';
+import Navbar from './Js/Header';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Css/Footer.css';
 import './Css/StarrySky.css';
+import './Css/Header.css';
 
 function App() {
   return (
@@ -14,10 +15,8 @@ function App() {
     
 
     <div className="App">
-    <div className='Navbar'>
+   
       <Navbar />
-    </div>
-    
 
     <div className='StarrySky'>
       <StarrySky />
