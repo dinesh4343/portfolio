@@ -1,0 +1,221 @@
+                .hero-section {
+                      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+                    color: white;
+                    min-height: 100vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: sans-serif;
+                    padding: 1rem;
+                }
+
+                /* Container for centering content */
+                .container {
+                    width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+
+                @media (min-width: 640px) {
+                    .container {
+                        max-width: 640px;
+                    }
+                }
+
+                @media (min-width: 768px) {
+                    .container {
+                        max-width: 768px;
+                    }
+                }
+
+                @media (min-width: 1024px) {
+                    .container {
+                        max-width: 1024px;
+                    }
+                }
+
+                @media (min-width: 1280px) {
+                    .container {
+                        max-width: 1280px;
+                    }
+                }
+
+                /* Flex wrapper for the two-column layout */
+                .content-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 3rem;
+                }
+
+                @media (min-width: 768px) {
+                    .content-wrapper {
+                        flex-direction: row;
+                    }
+                }
+
+                /* Left side: Text content */
+                .text-content {
+                    text-align: center;
+                }
+
+                .text-contnt svg {
+                    font-size: 28px;
+                    /* Increases the icon size */
+
+                    margin-right: 12px;
+                    /* Adds a clean space between the icon and the text */
+                }
+
+                @media (min-width: 768px) {
+                    .text-content {
+                        width: 50%;
+                        text-align: left;
+                    }
+                }
+
+                .text-content h1 {
+                    font-size: 2.25rem;
+                    /* 36px */
+                    font-weight: 800;
+                    line-height: 1.25;
+                    margin-bottom: 1rem;
+                }
+
+
+                @media (min-width: 768px) {
+                    .text-content h1 {
+                        font-size: 3rem;
+                    }
+                }
+
+                /* 48px */
+                @media (min-width: 1024px) {
+                    .text-content h1 {
+                        font-size: 3.75rem;
+                    }
+                }
+
+                /* 60px */
+
+                .text-content .subtitle {
+                    font-size: 1.25rem;
+                    /* 20px */
+                    color: #d1d5db;
+                    /* gray-300 */
+                    margin-bottom: 2rem;
+                }
+
+                @media (min-width: 768px) {
+                    .text-content .subtitle {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                /* 24px */
+
+                .text-content .subtitle span {
+                    font-weight: 700;
+                    color: #22d3ee;
+                    /* cyan-400 */
+                }
+
+                .text-content .role-text {
+                    font-size: 1.125rem;
+                    /* 18px */
+                    color: #9ca3af;
+                    /* gray-400 */
+                    height: 2rem;
+                    /* Fixed height to prevent layout shift */
+                }
+
+                @media (min-width: 768px) {
+                    .text-content .role-text {
+                        font-size: 1.25rem;
+                    }
+                }
+
+                /* 20px */
+
+                .typed-role {
+                    font-weight: 600;
+                    color: #67e8f9;
+                    /* cyan-300 */
+                    background-color: rgba(34, 211, 238, 0.1);
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 0.25rem;
+                }
+
+                .typing-cursor {
+                    display: inline-block;
+                    width: 2px;
+                    height: 1.25rem;
+                    background-color: #67e8f9;
+                    /* cyan-300 */
+                    margin-left: 4px;
+                    animation: blink 1s infinite;
+                }
+
+                @keyframes blink {
+
+                    0%,
+                    100% {
+                        opacity: 1;
+                    }
+
+                    50% {
+                        opacity: 0;
+                    }
+                }
+
+                /* Right side: Image content */
+                .image-container {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                @media (min-width: 768px) {
+                    .image-container {
+                        width: 50%;
+                    }
+                }
+
+                /* Wrapper for the blob/image */
+                .blob-wrapper {
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 0 2rem rgba(242, 253, 255, 0.1);
+                    width: 16rem;
+                    /* 256px */
+                    height: 16rem;
+                    clip-path: polygon(50% 0%, 85% 15%, 100% 50%, 85% 85%, 50% 100%, 15% 85%, 0% 50%, 15% 15%);
+                    transition: clip-path 0.3s ease-in-out;
+                }
+
+                @media (min-width: 640px) {
+                    .blob-wrapper {
+                        width: 20rem;
+                        height: 20rem;
+                    }
+                }
+
+                /* 320px */
+                @media (min-width: 1024px) {
+                    .blob-wrapper {
+                        width: 24rem;
+                        height: 24rem;
+                    }
+                }
+
+                /* 384px */
+
+                .blob-wrapper img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }

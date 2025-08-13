@@ -25,22 +25,22 @@ function Header() {
   // Effect to set active link on initial load and hash changes
   useEffect(() => {
     const handleHashChange = () => {
-        setActiveLink(window.location.hash || '#');
+      setActiveLink(window.location.hash || '#');
     };
-    
+
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => {
-        window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  
+
   const handleLinkClick = (href) => {
-    setIsMenuOpen(false); 
+    setIsMenuOpen(false);
   };
 
   const navLinks = [
@@ -54,14 +54,14 @@ function Header() {
     <header className="portfolio-header">
       <div className="header-container">
         <div className="header-content">
-          
+
           {/* Left side: Logo Image */}
           <div className="logo-container">
             <a href="#" onClick={() => handleLinkClick('#')} className="logo-link">
               {/* Replace this placeholder with your actual logo image */}
-              <img 
-                src="https://placehold.co/120x40/transparent/ffffff?text=Your+Logo" 
-                alt="Your Logo" 
+              <img
+                src="https://placehold.co/120x40/transparent/ffffff?text=Your+Logo"
+                alt="Your Logo"
                 className="logo-image"
                 onError={(e) => { e.currentTarget.src = 'https://placehold.co/120x40/000000/ffffff?text=Logo+Error'; }}
               />
@@ -98,7 +98,7 @@ function Header() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <div 
+      <div
         className={`mobile-nav ${isMenuOpen ? 'open' : ''}`}
         id="mobile-menu"
       >

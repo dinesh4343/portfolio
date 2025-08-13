@@ -3,7 +3,7 @@
     background-color: transparent;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px); /* For Safari */
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 50;
     width: 100%;
@@ -21,7 +21,7 @@
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; 
     height: 4rem; /* 64px */
 }
 
