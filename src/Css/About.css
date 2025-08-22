@@ -5,8 +5,8 @@
     --text-color-light: #f9fafb; /* gray-100 */
     --text-color-medium: #d1d5db; /* gray-300 */
     --text-color-dark: #9ca3af; /* gray-400 */
-    --primary-color: #6366f1; /* indigo-500 */
-    --border-color: #374151; /* gray-700 */
+    --primary-color: #22d3ee; /* indigo-500 */
+    --border-color: #22d3ee; /* gray-700 */
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -20,10 +20,11 @@
 /* --- Main Component Styles --- */
 .about-section {
     z-index: 99999;
-    background-color: var(--bg-color-dark);
+    text-align: justify;
     color: var(--text-color-medium);
     padding: 1rem;
     font-family: var(--font-family);
+    margin-bottom: 200px;
 }
 
 .about-container {
