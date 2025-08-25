@@ -19,6 +19,7 @@
 
 /* --- Main Component Styles --- */
 .about-section {
+    background-color: #111827;
     z-index: 99999;
     text-align: justify;
     color: var(--text-color-medium);

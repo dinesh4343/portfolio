@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
+
 export default function EducationExperience() {
-  // 4 dummy items in each tab
   const education = [
     { title: "B.Tech in Computer Science", org: "XYZ University", period: "2019 – 2023", details: "CGPA: 8.4, Major in Web Development" },
     { title: "Higher Secondary (XII)", org: "ABC Sr. Sec. School", period: "2017 – 2019", details: "PCM, 92%" },
@@ -25,47 +25,15 @@ export default function EducationExperience() {
 
   const activeData = tabs.find(t => t.key === activeTab)?.data ?? [];
 
-  const TimelineItem = ({ item, idx }) => {
-    const side = idx % 2 === 0 ? "left" : "right"; // alternate
-    return (
-      <li className={`tl-item tl-${side}`}>
-        <div className="tl-col tl-col-left">
-          {side === "left" && (
-            <div className="tl-content">
-              <div className="tl-header">
-                <h3 className="tl-title">{item.title}</h3>
-                <span className="tl-period">{item.period}</span>
-              </div>
-              <div className="tl-sub">{item.org}</div>
-              {item.details && <p className="tl-details">{item.details}</p>}
-            </div>
-          )}
-        </div>
-
-        <div className="tl-axis">
-          <span className="tl-dot" aria-hidden />
-        </div>
-
-        <div className="tl-col tl-col-right">
-          {side === "right" && (
-            <div className="tl-content">
-              <div className="tl-header">
-                <h3 className="tl-title">{item.title}</h3>
-                <span className="tl-period">{item.period}</span>
-              </div>
-              <div className="tl-sub">{item.org}</div>
-              {item.details && <p className="tl-details">{item.details}</p>}
-            </div>
-          )}
-        </div>
-      </li>
-    );
-  };
-
   return (
     <section className="container">
-      <h2 className="section-title">Education & Experience</h2>
+      {/* Heading */}
+      <div className="about-heading">
+        <h1>Education & Experience</h1>
+        <div className="heading-underline"></div>
+      </div>
 
+      {/* Tabs */}
       <div className="tabs" role="tablist" aria-label="Education and Experience Tabs">
         {tabs.map(t => (
           <button
@@ -83,15 +51,20 @@ export default function EducationExperience() {
         ))}
       </div>
 
-      <div
-        role="tabpanel"
-        id={`panel-${activeTab}`}
-        aria-labelledby={`tab-${activeTab}`}
-        className="panel"
-      >
-        <ol className="timeline alternate">
+      {/* Timeline */}
+      <div role="tabpanel" id={`panel-${activeTab}`} aria-labelledby={`tab-${activeTab}`} className="panel">
+        <ol className="timeline">
           {activeData.map((item, idx) => (
-            <TimelineItem key={idx} item={item} idx={idx} />
+            <li key={idx} className={`timeline-item ${idx % 2 === 0 ? "left" : "right"}`}>
+              <div className="content">
+                <div className="header">
+                  <h3 className="title">{item.title}</h3>
+                  <span className="period">{item.period}</span>
+                </div>
+                <div className="sub">{item.org}</div>
+                {item.details && <p className="details">{item.details}</p>}
+              </div>
+            </li>
           ))}
         </ol>
       </div>

@@ -1,11 +1,12 @@
 
 import './App.css';
 
-import ParticleNetwork from './Js/ParticleNetwork';
+
 import Navbar from './Js/Header';
 import Hero from './Js/Hero';
 import About from './Js/About';
 import EducationExperience from './Js/EducationExperience';
+import Footer from './Js/Footer';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,9 +50,12 @@ function App() {
       <div className='EducationExperience'>
         <EducationExperience />
       </div>
+
+
+      <div className='Footer'>
+        <Footer/>
+      </div>
       
-
-
 
 
     </div>
