@@ -1,223 +1,207 @@
-/* Dark Theme Base */
-:root {
-  --primary-color: #6366f1; /* Indigo (Tailwind style) */
-  --text-color-light: #f9fafb;
-  --bg-dark: #111827; /* slate-900 */
-  --bg-card: #1f2937; /* slate-800 */
-}
+/* Keep your existing variables and body exactly as-is */
 
-body {
-  background: var(--bg-dark);
-  color: var(--text-color-light);
-  font-family: system-ui, sans-serif;
-}
-
-/* Container */
+/* Container: slightly wider and more breathing room */
 .container {
-  padding: 2rem 1rem;
-  max-width: 900px;
+  padding: 2.5rem 1.25rem; /* increased */
+  max-width: 1100px;       /* from 900px -> 1100px */
   margin: 0 auto;
 }
 
-/* Heading */
+/* Heading: larger for presence */
 .about-heading {
-  margin-bottom: 3rem;
+  margin-bottom: 3.25rem; /* slightly increased */
   text-align: center;
 }
-
 .about-heading h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
+  font-size: 2.6rem;      /* from 2.25rem -> 2.6rem */
+  font-weight: 800;
   color: var(--text-color-light);
   margin: 0;
 }
-
 .heading-underline {
-  width: 6rem;
-  height: 4px;
+  width: 7rem;            /* from 6rem -> 7rem */
+  height: 5px;            /* from 4px -> 5px */
   background-color: var(--primary-color);
   border-radius: 9999px;
   margin: 1rem auto 0;
 }
 
-/* Tabs inside a box */
+/* Tabs box: bigger, same colors */
 .tabs {
   display: inline-flex;
+
+  
   justify-content: center;
   background: var(--bg-card);
-  padding: 0.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  margin: 0 auto 2rem;
-  gap: 0.5rem;
+      /* increased */
+  border-radius: 14px;    /* slightly larger */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.55); /* a bit deeper */
+  margin: 0 auto 2.25rem; /* increased bottom space */
+  gap: 0.6rem;
+  position: relative;     /* for any future indicators */
 }
 
+/* Tab pills: bigger hit area, same palette */
 .tab {
-  padding: 0.5rem 1.25rem;
+  padding: 0.7rem 1.4rem; /* larger */
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  color: #9ca3af; /* gray-400 */
+  border-radius: 10px;    /* slightly larger */
+  font-weight: 700;       /* slightly heavier */
+  font-size: 1rem;        /* bump */
+  color: #9ca3af;         /* gray-400 */
   background: transparent;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  transform: translateZ(0); /* minor GPU acceleration */
 }
-
+.tab:hover {
+  color: var(--text-color-light);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.5);
+}
+.tab:active {
+  transform: translateY(-1px);
+}
 .tab.active {
   background-color: var(--primary-color);
   color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
 }
 
-/* Timeline Line */
+/* Timeline center line: thicker */
 .timeline {
   position: relative;
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .timeline::before {
   content: "";
   position: absolute;
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: #374151; /* gray-700 */
+  width: 4px;                   /* from 3px -> 4px */
+  background: #374151; 
+  border-radius: 100rem;         /* gray-700, unchanged */
   transform: translateX(-50%);
   z-index: 0;
 }
 
-/* Timeline Items */
+/* Timeline Items: larger card area */
 .timeline-item {
   position: relative;
-  width: 50%;
-  padding: 1.5rem 2rem;
+  width: 70%;
+  padding: 2rem 2.5rem;         /* from 1.5/2rem -> 2/2.5rem */
   box-sizing: border-box;
 }
-
 .timeline-item::before {
   content: "";
   position: absolute;
-  top: 24px;
-  width: 14px;
-  height: 14px;
+  top: 28px;                    /* slightly lower */
+  width: 16px;                  /* from 14px -> 16px */
+  height: 16px;
   border-radius: 50%;
   background: var(--primary-color);
   border: 3px solid var(--bg-dark);
   z-index: 2;
+  box-shadow: 0 0 16px rgba(99,102,241,0.35); /* subtle glow */
 }
 
-/* Left Items */
-.timeline-item.left {
-  left: 0;
-  text-align: right;
-}
+/* Left/Right positioning unchanged */
+.timeline-item.left { right :20%; text-align: right; }
+.timeline-item.left::before { right: -8px; }  /* adjusted with bigger dot */
+.timeline-item.right { left: 50%; text-align: left; }
+.timeline-item.right::before { left: -8px; }
 
-.timeline-item.left::before {
-  right: -7px;
-}
-
-/* Right Items */
-.timeline-item.right {
-  left: 50%;
-  text-align: left;
-}
-
-.timeline-item.right::before {
-  left: -7px;
-}
-
-/* Content Card */
+/* Content Card: larger and deeper */
 .timeline-item .content {
   background: var(--bg-card);
-  padding: 1.25rem 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  padding: 1.75rem 1.75rem;       /* from 1.25/1.5 -> 1.5/1.75 */
+  border-radius: 12px;           /* from 8px -> 12px */
+  box-shadow: 0 10px 28px rgba(0,0,0,0.55); /* deeper */
   position: relative;
   z-index: 1;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.timeline-item .content:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.6);
 }
 
-/* Arrow Connector Effect */
+/* Arrow Connector: slightly larger to match card size */
 .timeline-item.left .content::after {
   content: "";
   position: absolute;
-  top: 24px;
-  right: -12px;
-  border-width: 8px;
+  top: 28px;
+  right: -18px;                  /* from -16px -> -18px */
+  border-width: 9px;             /* from 8px -> 9px */
   border-style: solid;
   border-color: transparent transparent transparent var(--bg-card);
 }
-
 .timeline-item.right .content::after {
   content: "";
   position: absolute;
-  top: 24px;
-  left: -12px;
-  border-width: 8px;
+  top: 28px;
+  left: -18px;                   /* from -16px -> -18px */
+  border-width: 9px;
   border-style: solid;
   border-color: transparent var(--bg-card) transparent transparent;
 }
 
-/* Content Structure */
+/* Typography inside cards: larger */
 .timeline-item .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: .75rem;
 }
-
 .timeline-item .title {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.25rem;            /* from 1.125rem -> 1.25rem */
+  font-weight: 700;
   margin: 0;
   color: var(--text-color-light);
 }
-
 .timeline-item .period {
-  font-size: 0.875rem;
+  font-size: 0.95rem;            /* from 0.875rem -> 0.95rem */
   color: #9ca3af;
 }
-
 .timeline-item .sub {
-  font-size: 0.95rem;
+  font-size: 1rem;               /* from 0.95rem -> 1rem */
   color: var(--primary-color);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 }
-
 .timeline-item .details {
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
+  font-size: 1rem;               /* from 0.9rem -> 1rem */
+  margin-top: 0.6rem;            /* slightly more space */
   color: #d1d5db;
-  line-height: 1.4;
+  line-height: 1.6;              /* a bit taller for readability */
 }
 
-/* Responsive (stacked) */
+/* Responsive (stacked): make sure spacing scales too */
 @media (max-width: 768px) {
-  .timeline::before {
-    left: 20px;
-  }
+  .timeline::before { left: 24px; } /* slightly more left for larger dots */
 
   .timeline-item {
     width: 100%;
-    padding-left: 3rem;
+    padding-left: 3.75rem;         /* a bit more for larger arrow/dot */
     text-align: left !important;
   }
-
   .timeline-item.left,
-  .timeline-item.right {
-    left: 0;
-  }
+  .timeline-item.right { left: 0; }
 
   .timeline-item.left::before,
   .timeline-item.right::before {
-    left: 8px;
+    left: 16px;                    /* align with thicker center line */
   }
 
   .timeline-item.left .content::after,
   .timeline-item.right .content::after {
-    left: -12px;
+    left: -14px;
     right: auto;
+    border-width: 9px;
     border-color: transparent var(--bg-card) transparent transparent;
   }
 }

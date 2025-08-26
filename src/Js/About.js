@@ -22,7 +22,7 @@ const AboutSection = () => {
       <div className="about-container">
         
         <div className="about-heading">
-           <h1>About Me</h1>
+           <h1>About</h1>
            <div className="heading-underline"></div>
         </div>
 
