@@ -1,14 +1,15 @@
+// SkillsFullStack.js
 import React, { useEffect, useMemo, useRef, useState, useId } from "react";
 import { motion, useAnimation } from "framer-motion";
 
-/* Dev logs */
+// Dev logs (grouped)
 const DEV = process.env.NODE_ENV !== "production";
 const group = (label, fn) => { if (!DEV) return fn?.(); console.groupCollapsed(`[Skills] ${label}`); try { fn?.(); } finally { console.groupEnd(); } };
 const log = (...a) => DEV && console.log("[Skills]", ...a);
 const info = (...a) => DEV && console.info("[Skills]", ...a);
 const warn = (...a) => DEV && console.warn("[Skills]", ...a);
 
-/* In-view hook */
+// Simple in-view hook
 function useInViewOnce(options = { threshold: 0.25 }) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -25,7 +26,7 @@ function useInViewOnce(options = { threshold: 0.25 }) {
       }, options);
       obs.observe(el);
     } catch (e) {
-      warn("IntersectionObserver unsupported");
+      warn("IntersectionObserver unsupported; reveal immediately", e);
       setInView(true);
     }
     return () => obs && obs.disconnect();
@@ -33,10 +34,9 @@ function useInViewOnce(options = { threshold: 0.25 }) {
   return { ref, inView };
 }
 
-/* Category and skill icons (Bootstrap Icons) */
+// Bootstrap icon map for categories and skills
 const CAT_ICON = {
-  frontend: "bi-window",
-  backend: "bi-hdd-network-fill",
+  fullstack: "bi-window",     // renamed from frontend
   prog: "bi-code-slash",
   uiux: "bi-palette2",
   db: "bi-database-fill",
@@ -67,15 +67,15 @@ const SKILL_ICON = {
   Adaptability: "bi-arrows-move",
 };
 
-/* Data with detailed descriptions */
+// Data with Full Stack replacing Frontend, and Node JS merged into it
 const categories = [
   {
-    key: "frontend",
-    title: "Frontend",
+    key: "fullstack",
+    title: "Full Stack",
     description: [
-      "Accessible, responsive interfaces using semantic HTML and scalable CSS systems.",
-      "Component-driven React UIs emphasizing state management, performance, and reusability.",
-      "Cross-browser styling, utility-first patterns, and design-token alignment.",
+      "End‑to‑end product development with semantic HTML, scalable CSS, and modern JavaScript.",
+      "Component‑driven React UIs, state and performance tuning, and design‑token alignment.",
+      "Server‑side Node.js fundamentals: routing, middleware, and API integration with the UI.",
     ],
     items: [
       { name: "HTML", level: 90 },
@@ -83,25 +83,16 @@ const categories = [
       { name: "JavaScript", level: 85 },
       { name: "React", level: 80 },
       { name: "Bootstrap", level: 90 },
+      { name: "Node JS", level: 85 }, // moved here
     ],
-  },
-  {
-    key: "backend",
-    title: "Backend",
-    description: [
-      "RESTful API design with Node.js including authentication and middleware orchestration.",
-      "Structured logging, robust error handling, and scalable project layouts.",
-      "Response optimization with caching, pagination, and payload minimization.",
-    ],
-    items: [{ name: "Node JS", level: 85 }],
   },
   {
     key: "prog",
     title: "Programming Languages",
     description: [
-      "Hands-on with DSA, OOP, and algorithmic problem solving across ecosystems.",
-      "Idiomatic code style and tooling proficiency for C-family and Python.",
-      "Context switching between imperative and object-oriented paradigms.",
+      "Hands‑on with DSA, OOP, and algorithmic problem solving across ecosystems.",
+      "Idiomatic code style and tooling proficiency for C‑family and Python.",
+      "Comfortable switching between imperative and object‑oriented paradigms.",
     ],
     items: [
       { name: "C", level: 80 },
@@ -114,9 +105,9 @@ const categories = [
     key: "uiux",
     title: "UI / UX",
     description: [
-      "Requirement translation into wireframes and high-fidelity design systems.",
-      "Visual hierarchy, spacing rhythm, and reusable component libraries.",
-      "Rapid prototyping for validating user flows and accessibility.",
+      "Translates requirements into wireframes and high‑fidelity design systems.",
+      "Focuses on visual hierarchy, spacing rhythm, and reusable component libraries.",
+      "Rapid prototyping to validate user flows and accessibility.",
     ],
     items: [
       { name: "Canva", level: 90 },
@@ -127,8 +118,8 @@ const categories = [
     key: "db",
     title: "Database",
     description: [
-      "Schema design that anticipates growth and enables clarity.",
-      "Query optimization with indexing, transactions, and constraints.",
+      "Schema design for clarity and growth; effective indexing and query optimization.",
+      "Transactions, constraints, and data integrity across services.",
       "Realtime sync and data modeling for cloud backends.",
     ],
     items: [
@@ -142,7 +133,7 @@ const categories = [
     title: "PEGA",
     description: [
       "Case lifecycle, UI forms, decisioning, and guardrails for enterprise solutions.",
-      "CSA/CSSA-aligned best practices for maintainable rule design.",
+      "CSA/CSSA‑aligned best practices for maintainable rule design.",
       "Modular, testable flows for scalable implementations.",
     ],
     items: [
@@ -154,9 +145,9 @@ const categories = [
     key: "soft",
     title: "Soft Skills",
     description: [
-      "Clear, proactive communication with technical and non-technical stakeholders.",
-      "Collaborative execution in high-velocity, quality-focused teams.",
-      "Adaptability and effective prompt crafting for AI-assisted workflows.",
+      "Clear, proactive communication with technical and non‑technical stakeholders.",
+      "Collaboration in high‑velocity, quality‑focused teams.",
+      "Adaptability and effective prompt crafting for AI‑assisted workflows.",
     ],
     items: [
       { name: "Communication", level: 80 },
@@ -167,7 +158,7 @@ const categories = [
   },
 ];
 
-/* Animations */
+// Animations
 const barVariants = {
   hidden: { width: "0%" },
   visible: (target) => ({
@@ -184,6 +175,7 @@ const itemVariants = {
   }),
 };
 
+// Skill row with icon and visual-only bar (no % text)
 function SkillRow({ catKey, s, i, controls }) {
   const icon = SKILL_ICON[s.name] || "bi-stars";
   const label = `${catKey} :: ${s.name}`;
@@ -210,6 +202,7 @@ function SkillRow({ catKey, s, i, controls }) {
   );
 }
 
+// Category panel with in-view trigger and filtering
 function CategoryPanel({ category, query }) {
   const controls = useAnimation();
   const { ref, inView } = useInViewOnce({ threshold: 0.25 });
@@ -241,20 +234,25 @@ function CategoryPanel({ category, query }) {
   );
 }
 
-export default function SkillsProEnhanced() {
+export default function SkillsFullStack() {
+  // Remove backend and build new tabs array with "Full Stack"
   const tabs = useMemo(() => categories, []);
   const [active, setActive] = useState(0);
   const [query, setQuery] = useState("");
   const tabsId = useId();
 
-  // Tabs visible based on search results
+  const allTabKeys = useMemo(() => tabs.map(t => t.key), [tabs]);
+
+  // Filter tabs by search (across all tabs)
   const filteredTabKeys = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return tabs.map((t) => t.key);
-    return tabs.filter((t) => t.items.some((s) => s.name.toLowerCase().includes(q))).map((t) => t.key);
-  }, [tabs, query]);
+    if (!q) return allTabKeys;
+    return tabs
+      .filter(t => t.items.some(s => s.name.toLowerCase().includes(q)))
+      .map(t => t.key);
+  }, [tabs, query, allTabKeys]);
 
-  // Keep active tab if it still matches; otherwise move to first matching
+  // Keep active tab valid while searching
   useEffect(() => {
     const activeKey = tabs[active]?.key;
     if (!activeKey) return;
@@ -266,27 +264,31 @@ export default function SkillsProEnhanced() {
 
   const onSelect = (idx) => setActive(idx);
 
-  // Search completion behavior:
-  // - Press Enter triggers filtering briefly, then auto-clears the input and restores tabs
+  // Search handlers: Enter completes then clears; Clear button restores all
   const onSearchKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       group("Search Complete", () => info("query:", query));
-      // Option A (current): clear immediately after Enter
-      setQuery("");
-      // Option B (debounced clear): setTimeout(() => setQuery(""), 1200);
+      // Keep focus on relevant tab if any match
+      const q = query.trim().toLowerCase();
+      if (q) {
+        const firstIdx = tabs.findIndex(t => t.items.some(s => s.name.toLowerCase().includes(q)));
+        if (firstIdx >= 0) setActive(firstIdx);
+      }
+      setQuery(""); // restore all tabs
     }
   };
-
   const clearSearch = () => {
     group("Search Cleared", () => info("reset query"));
     setQuery("");
+    
   };
 
   const activeCat = tabs[active];
 
   return (
     <>
+      {/* H1 sits outside the widget */}
       <div className="skills-page-header">
         <h1 className="page-title">Skills</h1>
         <div className="heading-underline" />
@@ -298,7 +300,7 @@ export default function SkillsProEnhanced() {
             <i className="bi bi-search search-icon" aria-hidden="true"></i>
             <input
               type="text"
-              placeholder="Search skills across all tabs (e.g., React, Python)"
+              placeholder="Search skills across all tabs (e.g., React, Node JS, Python)"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={onSearchKeyDown}
@@ -365,6 +367,7 @@ export default function SkillsProEnhanced() {
             </div>
           </div>
 
+          {/* Right: description for the selected tab */}
           <aside className="right card hoverable">
             <div className="right-header">
               <i className="bi bi-info-circle-fill right-icon" aria-hidden="true"></i>
