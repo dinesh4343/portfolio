@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-
 // --- SVG Icons for Menu ---
 const MenuIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+       viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
     <line x1="4" x2="20" y1="12" y2="12" />
     <line x1="4" x2="20" y1="6" y2="6" />
     <line x1="4" x2="20" y1="18" y2="18" />
@@ -11,9 +12,11 @@ const MenuIcon = (props) => (
 );
 
 const XIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M18 6 6 18" />
-    <path d="m6 6 12 12" />
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+       viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M18 6L6 18" />
+    <path d="M6 6L18 18" />
   </svg>
 );
 
@@ -22,7 +25,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('#');
 
-  // Effect to set active link on initial load and hash changes
+  // Update active link based on window hash changes
   useEffect(() => {
     const handleHashChange = () => {
       setActiveLink(window.location.hash || '#');
@@ -30,26 +33,27 @@ function Header() {
 
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Close menu and set active link when clicking a nav link
   const handleLinkClick = (href) => {
+    setActiveLink(href);
     setIsMenuOpen(false);
   };
 
   const navLinks = [
     { href: "#about", label: "About" },
+     { href: "#services", label: "Services" },
     { href: "#skills", label: "Skills" },
-    { href: "#Services", label: "Services"},
+   
     { href: "#projects", label: "Projects" },
-
-    { href: "#contact", label: "Contact" },
+    { href: "#Certificates", label: "Certificates" },
   ];
 
   return (
@@ -57,10 +61,9 @@ function Header() {
       <div className="header-container">
         <div className="header-content">
 
-          {/* Left side: Logo Image */}
+          {/* Left side: Logo */}
           <div className="logo-container">
-            <a href="#" onClick={() => handleLinkClick('#')} className="logo-link">
-              {/* Replace this placeholder with your actual logo image */}
+            <a href="#" onClick={() => handleLinkClick('#')} className="logo-link" aria-label="Home">
               <img
                 src="https://placehold.co/120x40/transparent/ffffff?text=Your+Logo"
                 alt="Your Logo"
@@ -70,32 +73,35 @@ function Header() {
             </a>
           </div>
 
-          {/* Right side: Desktop Navigation */}
-          <nav className="desktop-nav">
-            {navLinks.map((link) => (
+          {/* Desktop Navigation */}
+          <nav className="desktop-nav" aria-label="Primary navigation">
+            {navLinks.map(({ href, label }) => (
               <a
-                key={link.href}
-                href={link.href}
-                onClick={() => handleLinkClick(link.href)}
-                className={`nav-link ${activeLink === link.href ? 'active' : ''}`}
+                key={href}
+                href={href}
+                onClick={() => handleLinkClick(href)}
+                className={`nav-link ${activeLink === href ? 'active' : ''}`}
+                aria-current={activeLink === href ? 'page' : undefined}
               >
-                {link.label}
+                {label}
               </a>
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle Button */}
           <div className="mobile-menu-button-container">
             <button
               onClick={toggleMenu}
               className="mobile-menu-button"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              type="button"
             >
-              <span className="sr-only">Open main menu</span>
               {isMenuOpen ? <XIcon /> : <MenuIcon />}
             </button>
           </div>
+
         </div>
       </div>
 
@@ -103,16 +109,19 @@ function Header() {
       <div
         className={`mobile-nav ${isMenuOpen ? 'open' : ''}`}
         id="mobile-menu"
+        role="region"
+        aria-label="Mobile navigation menu"
       >
         <div className="mobile-nav-links">
-          {navLinks.map((link) => (
+          {navLinks.map(({ href, label }) => (
             <a
-              key={link.href}
-              href={link.href}
-              onClick={() => handleLinkClick(link.href)}
-              className={`mobile-nav-link ${activeLink === link.href ? 'active' : ''}`}
+              key={href}
+              href={href}
+              onClick={() => handleLinkClick(href)}
+              className={`mobile-nav-link ${activeLink === href ? 'active' : ''}`}
+              aria-current={activeLink === href ? 'page' : undefined}
             >
-              {link.label}
+              {label}
             </a>
           ))}
         </div>
