@@ -43,6 +43,17 @@ const services = [
     ],
   },
   {
+    title: "Pega CDH",
+    icon: <FiDatabase className="svc-icon" aria-hidden />,
+    points: [
+      "Real-time Next-Best-Action (NBA) decisions",
+      "Always-on customer journeys across all channels",
+      "AI + Business Rules for personalization & governance",
+
+    ],
+  }
+  ,
+  {
     title: "AI & Chatbots",
     icon: <FiCpu className="svc-icon" aria-hidden />,
     points: [
@@ -139,3 +150,4 @@ export default function Services() {
     </section>
   );
 }
+    

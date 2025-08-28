@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+// src/Js/Header.jsx
+import { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-// --- SVG Icons for Menu ---
 const MenuIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-       viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
     <line x1="4" x2="20" y1="12" y2="12" />
     <line x1="4" x2="20" y1="6" y2="6" />
@@ -12,118 +13,172 @@ const MenuIcon = (props) => (
 );
 
 const XIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-       viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M18 6L6 18" />
     <path d="M6 6L18 18" />
   </svg>
 );
 
-// --- Header Component ---
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('#');
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const mobileNavRef = useRef(null);
 
-  // Update active link based on window hash changes
+  // Update currentHash whenever hash changes
   useEffect(() => {
-    const handleHashChange = () => {
-      setActiveLink(window.location.hash || '#');
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    const handleHashChange = () => setCurrentHash(window.location.hash);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Close menu and set active link when clicking a nav link
-  const handleLinkClick = (href) => {
-    setActiveLink(href);
+  // Close menu when route changes
+  useEffect(() => {
     setIsMenuOpen(false);
-  };
+  }, [location.pathname, location.hash]);
 
   const navLinks = [
-    { href: "#about", label: "About" },
-     { href: "#services", label: "Services" },
-    { href: "#skills", label: "Skills" },
-   
-    { href: "#projects", label: "Projects" },
-    { href: "#Certificates", label: "Certificates" },
+    { href: "/#about", label: "About", isRoute: false },
+    { href: "/#services", label: "Services", isRoute: false },
+    { href: "/#skills", label: "Skills", isRoute: false },
+    { href: "/projects", label: "Projects", isRoute: true },
+    { href: "/#certificates", label: "Certificates", isRoute: false },
   ];
+
+  const handleDesktopHashClick = (e, href) => {
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      const id = href.replace("/#", "");
+      if (location.pathname !== "/") {
+        // Navigate to home, then scroll after navigation
+        navigate("/", { replace: false });
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+            window.history.replaceState(null, "", href);
+            setCurrentHash(`#${id}`);
+          }
+        }, 100);
+      } else {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          window.history.replaceState(null, "", href);
+          setCurrentHash(`#${id}`); // ✅ update manually
+        }
+      }
+    }
+  };
+
+  const handleMobileClick = (href, isRoute) => {
+    setIsMenuOpen(false);
+    setTimeout(() => {
+      if (isRoute) {
+        navigate(href);
+      } else {
+        window.location.href = href;
+      }
+    }, 50);
+  };
+
+  const isHashActive = (href) => {
+    if (!href.startsWith("/#")) return false;
+    return currentHash === `#${href.split("#")[1]}`;
+  };
 
   return (
     <header className="portfolio-header">
       <div className="header-container">
         <div className="header-content">
-
-          {/* Left side: Logo */}
           <div className="logo-container">
-            <a href="#" onClick={() => handleLinkClick('#')} className="logo-link" aria-label="Home">
+            <Link to="/" className="logo-link" onClick={() => setIsMenuOpen(false)}>
               <img
-                src="https://placehold.co/120x40/transparent/ffffff?text=Your+Logo"
-                alt="Your Logo"
+                src="https://placehold.co/120x40/transparent/ffffff?text=Logo"
+                alt="Logo"
                 className="logo-image"
-                onError={(e) => { e.currentTarget.src = 'https://placehold.co/120x40/000000/ffffff?text=Logo+Error'; }}
               />
-            </a>
+            </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="desktop-nav" aria-label="Primary navigation">
-            {navLinks.map(({ href, label }) => (
-              <a
-                key={href}
-                href={href}
-                onClick={() => handleLinkClick(href)}
-                className={`nav-link ${activeLink === href ? 'active' : ''}`}
-                aria-current={activeLink === href ? 'page' : undefined}
-              >
-                {label}
-              </a>
-            ))}
+          {/* Desktop Nav */}
+          <nav className="desktop-nav">
+            {navLinks.map(({ href, label, isRoute }) =>
+              isRoute ? (
+                <Link
+                  key={href}
+                  to={href}
+                  className={`nav-link ${location.pathname === href ? "active" : ""}`}
+                >
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  key={href}
+                  href={href}
+                  className={`nav-link ${isHashActive(href) ? "active" : ""}`}
+                  onClick={(e) => handleDesktopHashClick(e, href)}
+                >
+                  {label}
+                </a>
+              )
+            )}
           </nav>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile button */}
           <div className="mobile-menu-button-container">
             <button
-              onClick={toggleMenu}
               className="mobile-menu-button"
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              type="button"
+              onClick={() => setIsMenuOpen((v) => !v)}
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? <XIcon /> : <MenuIcon />}
             </button>
           </div>
-
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Nav */}
       <div
-        className={`mobile-nav ${isMenuOpen ? 'open' : ''}`}
-        id="mobile-menu"
-        role="region"
-        aria-label="Mobile navigation menu"
+        ref={mobileNavRef}
+        className={`mobile-nav${isMenuOpen ? " open" : ""}`}
+        style={{
+          position: "fixed",
+          top: "64px",
+          left: 0,
+          width: "100%",
+          zIndex: 100,
+          boxShadow: isMenuOpen ? "0 8px 32px rgba(0,0,0,0.2)" : "none",
+          color: "#fff",
+        }}
       >
         <div className="mobile-nav-links">
-          {navLinks.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              onClick={() => handleLinkClick(href)}
-              className={`mobile-nav-link ${activeLink === href ? 'active' : ''}`}
-              aria-current={activeLink === href ? 'page' : undefined}
-            >
-              {label}
-            </a>
-          ))}
+          {navLinks.map(({ href, label, isRoute }) => {
+            const isActive = isRoute
+              ? location.pathname === href
+              : isHashActive(href);
+
+            return (
+              <button
+                key={href}
+                className={`mobile-nav-link${isActive ? " active" : ""}`}
+                onClick={() => handleMobileClick(href, isRoute)}
+                style={{
+                  background: isActive ? "rgba(255,255,255,0.08)" : "transparent",
+                  color: "#fff",
+                  border: "none",
+                  width: "100%",
+                  textAlign: "left",
+                  cursor: "pointer",
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       </div>
     </header>

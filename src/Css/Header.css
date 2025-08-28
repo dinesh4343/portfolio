@@ -10,6 +10,7 @@
     transition: all 0.3s ease-in-out;
 }
 
+
 .header-container {
     max-width: 1280px;
     margin-left: auto;
@@ -69,23 +70,8 @@
 }
 
 .nav-link.active {
-    /* Active link has a slightly stronger background */
-   
-    color: #ffffff;
-}
-
-/* Underline for active desktop link */
-.nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%; /* Underline is smaller than the full link */
-    height: 2px;
-    /* Underline is white */
-    background-color: #ffffff;
-    border-radius: 9999px;
+  color: #fff !important; /* always force white */
+  font-weight: 600;
 }
 
 
@@ -161,11 +147,13 @@
 /* --- Responsive Styles (Medium screens and up) --- */
 @media (min-width: 768px) {
     .header-content {
+    
         height: 5rem; /* 80px */
     }
 
     .desktop-nav {
         display: flex;
+            margin-bottom: 25px;
     }
 
     .mobile-menu-button-container {
@@ -176,3 +164,5 @@
         display: none;
     }
 }
+
+

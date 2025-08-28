@@ -170,7 +170,7 @@
   color: var(--text-color-light);
 }
 .timeline-item .period {
-  font-size: 0.95rem;            /* from 0.875rem -> 0.95rem */
+  font-size: 0.8rem;            /* from 0.875rem -> 0.95rem */
   color: #9ca3af;
 }
 .timeline-item .sub {
