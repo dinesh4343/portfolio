@@ -27,22 +27,27 @@
 }
 
 /* Tabs box: bigger, same colors */
-.tabs {
-  display: inline-flex;
+.tabs-timeline{
+  display:inline-flex;
+    
 
   
   justify-content: center;
   background: var(--bg-card);
-      /* increased */
   border-radius: 14px;    /* slightly larger */
   box-shadow: 0 6px 16px rgba(0,0,0,0.55); /* a bit deeper */
-  margin: 0 auto 2.25rem; /* increased bottom space */
+  padding: 0.4rem;        /* increased */
   gap: 0.6rem;
-  position: relative;     /* for any future indicators */
+  position: relative;  
+  margin: 0 auto 3rem;
+
+
 }
 
 /* Tab pills: bigger hit area, same palette */
-.tab {
+.tab{
+
+  
   padding: 0.7rem 1.4rem; /* larger */
   border: none;
   border-radius: 10px;    /* slightly larger */
@@ -92,8 +97,8 @@
 /* Timeline Items: larger card area */
 .timeline-item {
   position: relative;
-  width: 70%;
-  padding: 2rem 2.5rem;         /* from 1.5/2rem -> 2/2.5rem */
+  width: 50%;
+  padding: 1rem 1.5rem;         /* from 1.5/2rem -> 2/2.5rem */
   box-sizing: border-box;
 }
 .timeline-item::before {
@@ -110,7 +115,7 @@
 }
 
 /* Left/Right positioning unchanged */
-.timeline-item.left { right :20%; text-align: right; }
+.timeline-item.left { right :0; text-align: right; }
 .timeline-item.left::before { right: -8px; }  /* adjusted with bigger dot */
 .timeline-item.right { left: 50%; text-align: left; }
 .timeline-item.right::before { left: -8px; }
@@ -204,4 +209,232 @@
     border-width: 9px;
     border-color: transparent var(--bg-card) transparent transparent;
   }
+
+
+}
+
+
+:root {
+  --primary-color: #6366f1;
+  --text-color-light: #f9fafb;
+  --bg-dark: #111827;
+  --bg-card: #1f2937;
+  --muted: #9ca3af;
+}
+
+/* Overlay with frosted effect */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.72); /* near-slate with opacity */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 9999;
+  animation: overlayFade 180ms ease-out;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Dialog */
+.popup-content {
+  background: linear-gradient(180deg, rgba(31,41,55,0.95), rgba(17,24,39,0.96));
+  color: var(--text-color-light);
+  border-radius: 16px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+  width: min(1200px, 92vw);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: dialogIn 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dialogIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Close button (top-right) */
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 36px;
+  width: 36px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .12s ease, background-color .18s ease, opacity .18s ease;
+}
+.popup-close:hover {
+  background: rgba(255,255,255,0.12);
+  transform: scale(1.02);
+}
+.popup-close:active { transform: scale(0.98); }
+
+/* Header */
+.popup-header {
+  padding: 16px 18px 8px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.popup-title {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: .2px;
+}
+
+/* Body */
+.popup-body {
+  padding: 12px 16px 16px;
+  overflow: hidden;
+}
+
+/* Iframe wrapper with ratio and rounded corners */
+.iframe-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* responsive */
+  background: #0b1020;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+.iframe-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Footer */
+.popup-footer {
+  padding: 12px 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Primary action (no border hover) */
+.popup-action {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(90deg, var(--primary-color), #7aa7ff);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transition: transform .12s ease, filter .18s ease, box-shadow .18s ease;
+}
+.popup-action:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.45);
+}
+.popup-action:active { transform: translateY(0); }
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .popup-content {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 14px;
+  }
+  .popup-body { padding: 10px; }
+  .popup-footer { padding: 10px; }
+}
+
+
+/* Pro, minimal, and accessible button */
+.btn-proff {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: 12px;
+
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)) padding-box,
+    linear-gradient(90deg, var(--primary-color), #7aa7ff) border-box;
+  border: 1px solid transparent; /* gradient border via background-clip trick */
+  background-clip: padding-box, border-box;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  transform: translateZ(0);
+
+  transition:
+    transform .12s ease,
+    filter .18s ease,
+    box-shadow .18s ease,
+    background .25s ease;
+}
+
+/* Optional icon on left (Bootstrap Icons) */
+.btn-proff__icon {
+  font-size: 1rem;
+  line-height: 1;
+  color: #fff; /* keep icon visible on indigo */
+}
+
+/* Label */
+.btn-proff__label {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* Hover: gentle lift and subtle brighten, no border flicker */
+.btn-proff:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Active: press effect */
+.btn-proff:active {
+  transform: translateY(0);
+  filter: brightness(1.0);
+}
+
+/* Focus-visible: soft indigo halo */
+.btn-proff:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(99,102,241,0.25),
+    0 10px 24px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Disabled (if needed) */
+.btn-proff:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
 }

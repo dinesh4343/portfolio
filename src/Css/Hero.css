@@ -173,50 +173,128 @@
                 }
 
                 /* Right side: Image content */
-                .image-container {
-                    display: flex;
-                    justify-content: center;
-                }
+.image-container {
+  display: flex;
+  justify-content: center;
+}
 
-                @media (min-width: 768px) {
-                    .image-container {
-                        width: 50%;
-                    }
-                }
+@media (min-width: 768px) {
+  .image-container {
+    width: 50%;
+  }
+}
 
-                /* Wrapper for the blob/image */
-                .blob-wrapper {
+/* === Core 3D Card wrapper === */
+.blob-card {
+  --card-height: 300px;
+  --card-width: calc(var(--card-height) / 1.1);
 
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    box-shadow: 0 0 2rem rgba(242, 253, 255, 0.1);
-                    width: 16rem;
-                    /* 256px */
-                    height: 16rem;
-                    clip-path: polygon(50% 0%, 85% 15%, 100% 50%, 85% 85%, 50% 100%, 15% 85%, 0% 50%, 15% 15%);
-                    transition: clip-path 0.3s ease-in-out;
-                }
+  width: var(--card-width);
+  height: var(--card-height);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  perspective: 2500px;
+  cursor: pointer;
+}
 
-                @media (min-width: 640px) {
-                    .blob-wrapper {
-                        width: 20rem;
-                        height: 20rem;
-                    }
-                }
+/* === Blob Shape == */
+.blob-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-                /* 320px */
-                @media (min-width: 1024px) {
-                    .blob-wrapper {
-                        width: 24rem;
-                        height: 24rem;
-                    }
-                }
+  width: 100%;
+  height: 100%;
 
-                /* 384px */
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  z-index: -1;
+}
 
-                .blob-wrapper img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
+.blob-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* === Hover tilt & 3D shadow === */
+.blob-card:hover .blob-wrapper {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+/* === Gradient overlays like card effect === */
+.blob-wrapper::before,
+.blob-wrapper::after {
+  content: "";
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  transition: all 0.5s;
+}
+
+.blob-wrapper::before {
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.blob-wrapper::after {
+  bottom: 0;
+  height: 120px;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.blob-card:hover .blob-wrapper::before,
+.blob-card:hover .blob-wrapper::after {
+  opacity: 1;
+}
+
+/* === Title image floating === */
+
+/* === Character fade-in floating === */
+/* Character same size as cover */
+.character {
+  position: absolute;
+  inset: 0;            /* top:0; right:0; bottom:0; left:0 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* match cover-image fitting */
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: 0;          /* above .blob-wrapper (which was -1), below .title */
+  transform: translate3d(0, 0, 0); /* baseline */
+}
+
+/* Keep the 3D pop without shrinking */
+.blob-card:hover .character {
+  opacity: 1;
+  transform: translate3d(0, -30%, 100px); /* pop out in Z, no XY shift */
+}
+
+/* Optional: if character needs to appear above gradients */
+.blob-wrapper { z-index: -1; }     /* background */
+.title { position: relative; z-index: 2; } /* above all */
+
+
+.title {
+  width: 80%;
+  transition: transform 0.5s;
+}
+.blob-card:hover .title {
+  transform: translate3d(0, -50px, 100px);
+}

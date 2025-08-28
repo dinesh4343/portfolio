@@ -32,7 +32,7 @@ const AboutSection = () => {
             <div className="image-wrapper">
                 <img 
                     className="profile-image" 
-                    src="https://placehold.co/400x400/2d3748/edf2f7?text=Your+Image" 
+                    src="/Png/img1.png" 
                     alt="A professional headshot of the portfolio owner"
                     onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/400x400/2d3748/edf2f7?text=Avatar'; }}
                 />

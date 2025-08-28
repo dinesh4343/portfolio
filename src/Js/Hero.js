@@ -91,14 +91,22 @@ export default function App() {
 
                         {/* Right Side: Image with Custom Blob Shape */}
                         <div className="image-container">
-                            <div className="blob-wrapper">
-                                <img
-                                    src="/Png/img3.jpg"
-                                    alt="A placeholder portrait"
-                                    onError={(e) => { e.currentTarget.src = 'https://placehold.co/400x400/1f2937/ffffff?text=Not+Found'; }}
-                                />
+                            <div className="blob-card">
+                                <div className="blob-wrapper">
+                                    <img
+                                        src="/Png/img1.png"
+                                        alt="A placeholder portrait"
+                                        onError={(e) => {
+                                            e.currentTarget.src = 'https://placehold.co/400x400/1f2937/ffffff?text=Not+Found';
+                                        }}
+                                        className="cover-image"
+                                    />
+                                </div>
+                                 
+                                <img src="/Png/img.png" alt="Character" className="character" />
                             </div>
                         </div>
+
 
                     </div>
                 </div>
