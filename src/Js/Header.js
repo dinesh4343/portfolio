@@ -45,7 +45,7 @@ function Header() {
     { href: "/#services", label: "Services", isRoute: false },
     { href: "/#skills", label: "Skills", isRoute: false },
     { href: "/projects", label: "Projects", isRoute: true },
-    { href: "/#certificates", label: "Certificates", isRoute: false },
+    { href: "/certifications", label: "Certifications", isRoute: false },
   ];
 
   const handleDesktopHashClick = (e, href) => {

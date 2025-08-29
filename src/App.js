@@ -7,7 +7,7 @@ import About from "./Js/About";
 import EducationExperience from "./Js/EducationExperience";
 import Services from "./Js/Services";
 import Skills from "./Js/Skills";
-
+import Certifications from "./Js/Certifications";
 import Footer from "./Js/Footer";
 import Projects from "./Js/Projects";
 
@@ -19,6 +19,7 @@ import "./Css/Hero.css";
 import "./Css/About.css";
 import "./Css/EducationExperience.css";
 import "./Css/Services.css";
+import "./Css/Certifications.css";
 import "./Css/Skills.css";
 
 
@@ -45,6 +46,9 @@ function App() {
 
         {/* Projects Page */}
         <Route path="/projects" element={<Projects />} />
+        
+        <Route path="/certifications" element={<Certifications />} />
+        
       </Routes>
       <Footer />
     </Router>
