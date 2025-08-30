@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import certificationsData from "../Data/CertificationsData";
+
+
 const uniqueSorted = (arr) => Array.from(new Set(arr)).sort((a, b) => a.localeCompare(b));
 
 const Certifications = () => {
@@ -7,7 +9,10 @@ const Certifications = () => {
   const [issuerFilter, setIssuerFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [techFilter, setTechFilter] = useState("All");
-  const [activeCert, setActiveCert] = useState(null); // modal
+  const [activeCert, setActiveCert] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 10; // show 10 certifications per page
 
   const issuers = useMemo(() => ["All", ...uniqueSorted(certificationsData.map(c => c.issuer))], []);
   const categories = useMemo(() => ["All", ...uniqueSorted(certificationsData.map(c => c.category))], []);
@@ -30,6 +35,16 @@ const Certifications = () => {
     });
   }, [search, issuerFilter, categoryFilter, techFilter]);
 
+  // --- PAGINATION ---
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const paginated = filtered.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   const anyFilterActive = search || issuerFilter !== "All" || categoryFilter !== "All" || techFilter !== "All";
   const clearAll = () => {
     setSearch("");
@@ -44,6 +59,7 @@ const Certifications = () => {
         <i className="bi bi-award-fill" aria-hidden="true"></i> Certifications
       </h2>
 
+      {/* Filters + Search */}
       <div className="controls">
         <div className="search-container">
           <i className="bi bi-search search-icon" aria-hidden="true"></i>
@@ -63,17 +79,17 @@ const Certifications = () => {
         </div>
 
         <label className="select-label" htmlFor="issuerSelect"><i className="bi bi-building"></i> Issuer</label>
-        <select id="issuerSelect" className="filter-dropdown" value={issuerFilter} onChange={(e) => setIssuerFilter(e.target.value)} aria-label="Filter by issuer">
+        <select id="issuerSelect" className="filter-dropdown" value={issuerFilter} onChange={(e) => setIssuerFilter(e.target.value)}>
           {issuers.map((i) => (<option key={i} value={i}>{i}</option>))}
         </select>
 
         <label className="select-label" htmlFor="categorySelect"><i className="bi bi-tag"></i> Category</label>
-        <select id="categorySelect" className="filter-dropdown" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} aria-label="Filter by category">
+        <select id="categorySelect" className="filter-dropdown" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
           {categories.map((c) => (<option key={c} value={c}>{c}</option>))}
         </select>
 
         <label className="select-label" htmlFor="techSelect"><i className="bi bi-cpu"></i> Technology</label>
-        <select id="techSelect" className="filter-dropdown" value={techFilter} onChange={(e) => setTechFilter(e.target.value)} aria-label="Filter by technology">
+        <select id="techSelect" className="filter-dropdown" value={techFilter} onChange={(e) => setTechFilter(e.target.value)}>
           {technologies.map((t) => (<option key={t} value={t}>{t}</option>))}
         </select>
 
@@ -84,8 +100,9 @@ const Certifications = () => {
         )}
       </div>
 
+      {/* Certifications Grid */}
       <div className="certifications-list">
-        {filtered.map((cert) => (
+        {paginated.map((cert) => (
           <article
             className="cert-card"
             key={`${cert.issuer}-${cert.title}-${cert.year}`}
@@ -127,7 +144,7 @@ const Certifications = () => {
           </article>
         ))}
 
-        {filtered.length === 0 && (
+        {paginated.length === 0 && (
           <div className="zero-state">
             <i className="bi bi-info-circle" aria-hidden="true"></i>
             <p>No certifications match the current filters.</p>
@@ -138,12 +155,33 @@ const Certifications = () => {
         )}
       </div>
 
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+            Prev
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i + 1}
+              className={currentPage === i + 1 ? "active" : ""}
+              onClick={() => handlePageChange(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
+      )}
+
       {/* Modal */}
       {activeCert && (
-        <div className="modal-overlay" onClick={() => setActiveCert(null)} role="dialog" aria-modal="true" aria-label={`${activeCert.title} preview`}>
+        <div className="modal-overlay" onClick={() => setActiveCert(null)} role="dialog" aria-modal="true">
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setActiveCert(null)} aria-label="Close certificate preview">
-              <i className="bi bi-x-lg" aria-hidden="true"></i>
+            <button className="modal-close" onClick={() => setActiveCert(null)}>
+              <i className="bi bi-x-lg"></i>
             </button>
             <div className="modal-header">
               <img src={activeCert.logo} alt={activeCert.issuer} />
@@ -164,10 +202,10 @@ const Certifications = () => {
             <p className="modal-details">{activeCert.details}</p>
             <div className="modal-actions">
               <a href={activeCert.link} target="_blank" rel="noopener noreferrer" className="modal-btn primary">
-                <i className="bi bi-box-arrow-up-right" aria-hidden="true"></i> Open original
+                <i className="bi bi-box-arrow-up-right"></i> Open original
               </a>
               <button className="modal-btn" onClick={() => setActiveCert(null)}>
-                <i className="bi bi-check2" aria-hidden="true"></i> Done
+                <i className="bi bi-check2"></i> Done
               </button>
             </div>
           </div>
