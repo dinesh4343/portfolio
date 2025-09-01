@@ -12,7 +12,7 @@ const Certifications = () => {
   const [activeCert, setActiveCert] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemsPerPage = 10; // show 10 certifications per page
+  const itemsPerPage = 12;
 
   const issuers = useMemo(() => ["All", ...uniqueSorted(certificationsData.map(c => c.issuer))], []);
   const categories = useMemo(() => ["All", ...uniqueSorted(certificationsData.map(c => c.category))], []);

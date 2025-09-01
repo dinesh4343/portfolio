@@ -37,8 +37,8 @@
 }
 
 .logo-image {
-    height: 2.5rem; /* 40px */
-    width: auto;
+    height: 8.5rem; /* 40px */
+    width: 8.5rem; /* auto */
     transition: opacity 0.3s ease-in-out;
 }
 .logo-image:hover {

@@ -97,7 +97,7 @@ function Header() {
           <div className="logo-container">
             <Link to="/" className="logo-link" onClick={() => setIsMenuOpen(false)}>
               <img
-                src="https://placehold.co/120x40/transparent/ffffff?text=Logo"
+                src="/Png/logo1.png"
                 alt="Logo"
                 className="logo-image"
               />
