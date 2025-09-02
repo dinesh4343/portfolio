@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "dineshpandian-portfolio",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

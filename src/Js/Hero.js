@@ -102,8 +102,9 @@ export default function App() {
                                         className="cover-image"
                                     />
                                 </div>
-                                 
+                          
                                 <img src="/Png/img.png" alt="Character" className="character" />
+                              
                             </div>
                         </div>
 

@@ -97,8 +97,8 @@ function Header() {
           <div className="logo-container">
             <Link to="/" className="logo-link" onClick={() => setIsMenuOpen(false)}>
               <img
-                src="/Png/logo1.png"
-                alt="Logo"
+                src="/Png/logo2.png"
+                alt="D"
                 className="logo-image"
               />
             </Link>
