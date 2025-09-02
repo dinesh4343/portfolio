@@ -70,46 +70,8 @@ export default function App() {
 
 
             <div className="hero-section">
-                <div className="container">
-                    <div className="content-wrapper">
-
-                        {/* Left Side: Text Content */}
-                        <div className="text-content">
-                            <h1>Welcome to My Portfolio</h1>
-                            <p className="subtitle">
-                                I am <span>Dinesh Pandian M</span>
-                            </p>
-                            <p className="role-text">
-                                A <span className="typed-role">{typedRole}</span><span className="typing-cursor"></span>
-                            </p>
-                            <br />
-
-                            <p className='text-contnt'> <MdSchool /> Graduate on 2025</p>
-                            <p className='text-contnt'> <FaBookOpen /> B Tech (Bachelor of Technology)</p>
-                            <p className='text-contnt'><span></span><FaHome /> Chennai</p>
-                        </div>
-
-                        {/* Right Side: Image with Custom Blob Shape */}
-                        <div className="image-container">
-                            <div className="blob-card">
-                                <div className="blob-wrapper">
-                                    <img
-                                        src="/Png/img1.png"
-                                        alt="A placeholder portrait"
-                                        onError={(e) => {
-                                            e.currentTarget.src = 'https://placehold.co/400x400/1f2937/ffffff?text=Not+Found';
-                                        }}
-                                        className="cover-image"
-                                    />
-                                </div>
-                                 
-                                <img src="/Png/img.png" alt="Character" className="character" />
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
+           
+     
             </div>
         </>
     );
