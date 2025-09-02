@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./Js/Header";
 import Hero from "./Js/Hero";
@@ -22,6 +22,7 @@ import "./Css/Services.css";
 import "./Css/Certifications.css";
 import "./Css/Skills.css";
 
+
 function HomePage() {
   return (
     <>
@@ -30,22 +31,24 @@ function HomePage() {
       <EducationExperience id="education" />
       <Services id="services" />
       <Skills id="skills" />
+
     </>
   );
 }
-
-// 👉 Decide router type automatically
-const Router =
-  window.location.hostname.includes("github.io") ? HashRouter : BrowserRouter;
 
 function App() {
   return (
     <Router>
       <Header />
       <Routes>
+        {/* Home Page (with scroll sections) */}
         <Route path="/" element={<HomePage />} />
+
+        {/* Projects Page */}
         <Route path="/projects" element={<Projects />} />
+        
         <Route path="/certifications" element={<Certifications />} />
+        
       </Routes>
       <Footer />
     </Router>
