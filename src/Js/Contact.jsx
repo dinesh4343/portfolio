@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { db } from "../firebase"; 
+import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-
+import Loader from "../components/Loader";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -25,8 +25,6 @@ export default function Contact() {
       });
       setForm({ name: "", email: "", message: "" });
       setSuccess(true);
-
-      // Auto-hide popup after 3s
       setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
       console.error("Error saving message:", error);
@@ -37,53 +35,62 @@ export default function Contact() {
 
   return (
     <div className="contact-container">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="contact-box"
-      >
-        <h2>Contact Me</h2>
-        <form onSubmit={handleSubmit} className="contact-form">
-          <motion.input
-            whileFocus={{ scale: 1.02, borderColor: "var(--primary-color)" }}
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
-          <motion.input
-            whileFocus={{ scale: 1.02, borderColor: "var(--primary-color)" }}
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-          <motion.textarea
-            whileFocus={{ scale: 1.02, borderColor: "var(--primary-color)" }}
-            name="message"
-            placeholder="Your Message"
-            rows="5"
-            value={form.message}
-            onChange={handleChange}
-            required
-          />
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? "Sending..." : "Send Message"}
-          </motion.button>
-        </form>
-      </motion.div>
+      <div className="contact-content">
+        <div className="contact-heading">
+          <h1>Contact Me</h1>
+          <div className="heading-underline"></div>
+        </div>
 
-      {/* ✅ Success Popup */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="contact-box"
+        >
+          <form onSubmit={handleSubmit} className="contact-form">
+            <motion.input
+              whileFocus={{ scale: 1.02, borderColor: "var(--primary-color)" }}
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+            <motion.input
+              whileFocus={{ scale: 1.02, borderColor: "var(--primary-color)" }}
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <motion.textarea
+              whileFocus={{ scale: 1.02, borderColor: "var(--primary-color)" }}
+              name="message"
+              placeholder="Your Message"
+              rows="5"
+              value={form.message}
+              onChange={handleChange}
+              required
+            />
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="submit"
+              disabled={loading}
+            >
+              Send Message
+            </motion.button>
+          </form>
+        </motion.div>
+      </div>
+
+      {/* ✅ Loader in center */}
+      <AnimatePresence>{loading && <Loader />}</AnimatePresence>
+
+      {/* ✅ Success Popup in center */}
       <AnimatePresence>
         {success && (
           <motion.div

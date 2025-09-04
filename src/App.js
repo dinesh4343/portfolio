@@ -1,3 +1,4 @@
+// src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -11,10 +12,11 @@ import Certifications from "./Js/Certifications";
 import Footer from "./Js/Footer";
 import Projects from "./Js/Projects";
 import Contact from "./Js/Contact";
+import RouteLoader from "./components/RouteLoader"; // ✅ import
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Css/Footer.css";
-import "./Css/ParticleNetwork.css";
+import "./Css/Loader.css";
 import "./Css/Header.css";
 import "./Css/Hero.css";
 import "./Css/About.css";
@@ -24,7 +26,6 @@ import "./Css/Certifications.css";
 import "./Css/Skills.css";
 import "./Css/Contact.css";
 
-
 function HomePage() {
   return (
     <>
@@ -33,8 +34,7 @@ function HomePage() {
       <EducationExperience id="education" />
       <Services id="services" />
       <Skills id="skills" />
-      <Contact/>
-    
+      <Contact />
     </>
   );
 }
@@ -43,16 +43,13 @@ function App() {
   return (
     <Router>
       <Header />
-      <Routes>
-        {/* Home Page (with scroll sections) */}
-        <Route path="/" element={<HomePage />} />
-
-        {/* Projects Page */}
-        <Route path="/projects" element={<Projects />} />
-        
-        <Route path="/certifications" element={<Certifications />} />
-        
-      </Routes>
+      <RouteLoader>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/certifications" element={<Certifications />} />
+        </Routes>
+      </RouteLoader>
       <Footer />
     </Router>
   );

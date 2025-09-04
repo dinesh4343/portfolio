@@ -1,5 +1,4 @@
-/* src/Contact.css */
-
+/* 🎨 Theme Variables */
 :root {
   --primary-color: #6366f1;
   --text-color-light: #f9fafb;
@@ -11,19 +10,45 @@
   --chip-hover: rgba(255, 255, 255, 0.08);
 }
 
+/* 📌 Page Container */
 .contact-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+ 
   padding: 20px;
-
-  font-family: Arial, sans-serif;
 }
 
-.contact-box {
+/* 📌 Content Wrapper */
+.contact-content {
+  text-align: center;
+  max-width: 600px;
   width: 100%;
-  max-width: 500px;
+}
+
+/* 📌 Section Title */
+.contact-heading {
+  margin-bottom: 2.5rem;
+}
+
+.contact-heading h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-color-light);
+  margin: 0;
+}
+
+.heading-underline {
+  width: 6rem;
+  height: 0.25rem;
+  background-color: var(--primary-color);
+  border-radius: 9999px;
+  margin: 1rem auto 0 auto;
+}
+
+/* 📌 Contact Box */
+.contact-box {
   background-color: var(--bg-card);
   border: 1px solid var(--outline);
   border-radius: 15px;
@@ -31,14 +56,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.contact-box h2 {
-  font-size: 26px;
-  font-weight: bold;
-  color: var(--text-color-light);
-  text-align: center;
-  margin-bottom: 20px;
-}
-
+/* 📌 Inputs + Textarea */
 .contact-form input,
 .contact-form textarea {
   width: 100%;
@@ -65,6 +83,7 @@
   transform: scale(1.02);
 }
 
+/* 📌 Button */
 .contact-form button {
   width: 100%;
   padding: 14px;
@@ -79,7 +98,7 @@
 }
 
 .contact-form button:hover {
-  background-color: #4f46e5; /* slightly darker shade of --primary-color */
+  background-color: #4f46e5;
   transform: scale(1.05);
 }
 
@@ -87,7 +106,6 @@
   background-color: var(--outline);
   cursor: not-allowed;
 }
-
 
 /* ✅ Success Popup */
 .success-popup {
@@ -118,7 +136,7 @@
   margin: 0;
 }
 
-/* ✅ Pop animation */
+/* ✅ Pop Animation */
 @keyframes pop {
   0% {
     transform: scale(0.5);

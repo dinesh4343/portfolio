@@ -289,12 +289,12 @@ export default function SkillsFullStack() {
   return (
     <>
       {/* H1 sits outside the widget */}
-      <div className="skills-page-header" >
+      <div className="skills-page-header" id="skills">
         <h1 className="page-title">Skills</h1>
         <div className="heading-underline" />
       </div>
 
-      <section className="skills-pro extra-wide" id="skills">
+      <section className="skills-pro extra-wide" >
         <div className="toolbar">
           <div className="search">
             <i className="bi bi-search search-icon" aria-hidden="true"></i>

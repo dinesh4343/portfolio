@@ -1,0 +1,53 @@
+/* Loader Overlay */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 24, 39, 0.85); /* dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Loader Squares */
+.loader {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  transform: rotate(45deg);
+}
+
+.loader-square {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  margin: 2px;
+  background: var(--primary-color);
+  animation: square-animation 10s ease-in-out infinite both;
+}
+
+/* delays */
+.loader-square:nth-of-type(1) { animation-delay: -1.4s; }
+.loader-square:nth-of-type(2) { animation-delay: -2.8s; }
+.loader-square:nth-of-type(3) { animation-delay: -4.2s; }
+.loader-square:nth-of-type(4) { animation-delay: -5.6s; }
+.loader-square:nth-of-type(5) { animation-delay: -7s; }
+.loader-square:nth-of-type(6) { animation-delay: -8.4s; }
+.loader-square:nth-of-type(7) { animation-delay: -9.8s; }
+
+@keyframes square-animation {
+  0%, 10.5% { left: 0; top: 0; }
+  12.5%, 23% { left: 32px; top: 0; }
+  25%, 35.5% { left: 64px; top: 0; }
+  37.5%, 48% { left: 64px; top: 32px; }
+  50%, 60.5% { left: 32px; top: 32px; }
+  62.5%, 73% { left: 32px; top: 64px; }
+  75%, 85.5% { left: 0; top: 64px; }
+  87.5%, 98% { left: 0; top: 32px; }
+  100% { left: 0; top: 0; }
+}
