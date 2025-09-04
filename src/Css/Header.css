@@ -37,7 +37,7 @@
 }
 
 .logo-image {
-    height: 8.5rem; /* 40px */
+    height: 3.5rem; /* 40px */
     width: auto; /* auto */
     transition: opacity 0.3s ease-in-out;
 }

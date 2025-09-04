@@ -65,6 +65,7 @@
 /* ---------------------- */
 @media (max-width: 768px) {
   .social-sidebar {
+    margin-top: 25px;
     top: auto;
     bottom: 0;
     left: 0;

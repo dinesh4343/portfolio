@@ -8,28 +8,28 @@ export default function SocialSidebar() {
   const links = [
     {
       id: 1,
-      href: "mailto:your@email.com",
+      href: "mailto:dineshpandian008@gmail.com",
       label: "Email",
       icon: <MdEmail size={20} />,
       color: "bg-red-500",
     },
     {
       id: 2,
-      href: "https://instagram.com/yourprofile",
+      href: "https://www.instagram.com/d.i.n_x_e.s.h/",
       label: "Instagram",
       icon: <FaInstagram size={20} />,
       color: "bg-pink-500",
     },
     {
       id: 3,
-      href: "https://github.com/yourprofile",
+      href: "https://github.com/dinesh4343",
       label: "GitHub",
       icon: <FaGithub size={20} />,
       color: "bg-gray-700",
     },
     {
       id: 4,
-      href: "https://linkedin.com/in/yourprofile",
+      href: "https://www.linkedin.com/in/dinesh-pandian43/",
       label: "LinkedIn",
       icon: <FaLinkedin size={20} />,
       color: "bg-blue-600",

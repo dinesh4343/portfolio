@@ -10,6 +10,7 @@ import Skills from "./Js/Skills";
 import Certifications from "./Js/Certifications";
 import Footer from "./Js/Footer";
 import Projects from "./Js/Projects";
+import Contact from "./Js/Contact";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Css/Footer.css";
@@ -21,6 +22,7 @@ import "./Css/EducationExperience.css";
 import "./Css/Services.css";
 import "./Css/Certifications.css";
 import "./Css/Skills.css";
+import "./Css/Contact.css";
 
 
 function HomePage() {
@@ -31,7 +33,8 @@ function HomePage() {
       <EducationExperience id="education" />
       <Services id="services" />
       <Skills id="skills" />
-
+      <Contact/>
+    
     </>
   );
 }

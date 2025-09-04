@@ -1,0 +1,134 @@
+/* src/Contact.css */
+
+:root {
+  --primary-color: #6366f1;
+  --text-color-light: #f9fafb;
+  --bg-dark: #111827;
+  --bg-card: #1f2937;
+  --muted: #9ca3af;
+  --outline: #2a3243;
+  --chip-bg: rgba(255, 255, 255, 0.04);
+  --chip-hover: rgba(255, 255, 255, 0.08);
+}
+
+.contact-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  font-family: Arial, sans-serif;
+}
+
+.contact-box {
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--outline);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.contact-box h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--text-color-light);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--outline);
+  background-color: var(--chip-bg);
+  color: var(--text-color-light);
+  margin-bottom: 15px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--muted);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary-color);
+  background-color: var(--chip-hover);
+  transform: scale(1.02);
+}
+
+.contact-form button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #4f46e5; /* slightly darker shade of --primary-color */
+  transform: scale(1.05);
+}
+
+.contact-form button:disabled {
+  background-color: var(--outline);
+  cursor: not-allowed;
+}
+
+
+/* ✅ Success Popup */
+.success-popup {
+  position: fixed;
+  top: 50%;
+  
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-card);
+  color: var(--text-color-light);
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  z-index: 9999;
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.success-popup .success-icon {
+  font-size: 70px;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  animation: pop 0.6s ease;
+}
+
+.success-popup p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* ✅ Pop animation */
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
