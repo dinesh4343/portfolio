@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import Loader from "../components/Loader";
+import Loader from "./Loader";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });

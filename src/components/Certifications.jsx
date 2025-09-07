@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import certificationsData from "../Data/CertificationsData";
+import certificationsData from "./CertificationsData";
 
 
 const uniqueSorted = (arr) => Array.from(new Set(arr)).sort((a, b) => a.localeCompare(b));

@@ -17,7 +17,7 @@ export default function EducationExperience() {
   "title": "Python Intern",
   "org": "Nan Mudhalvan  – Govt. of Tamil Nadu",
   "period": "31st March - 30gh April 2023",
-  "certificate": "/PEL_NM_PY1205.pdf",
+  "certificate": "/Certificates/INTERNSHIP/pantech.png",
   "details": "Contributed to Python-based application development under the Nan Mudhalvan government internship scheme in Chennai, including building components, writing test cases, and preparing documentation."
 }
 ,
@@ -38,7 +38,7 @@ export default function EducationExperience() {
     { title: "Open Source Contributor", org: "GitHub", period: "2021 – 2022", details: "Bug fixes, docs, small features" }
   ];
 
-  const [activeTab, setActiveTab] = useState("experience");
+  const [activeTab, setActiveTab] = useState("education");
 
   const tabs = [
     { key: "education", label: "Education", data: education },
