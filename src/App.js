@@ -25,7 +25,7 @@ import "./Styles/Services.css";
 import "./Styles/Certifications.css";
 import "./Styles/Skills.css";
 import "./Styles/Contact.css";
-import "./Styles/Project.css";
+
 
 function HomePage() {
   return (

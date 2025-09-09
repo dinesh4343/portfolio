@@ -152,29 +152,7 @@ const certificationsData = [
     details: "Introduced Python programming fundamentals with applications in data science.",
     logo: "https://www.edx.org/trademark-logos/edx-logo-elm.svg"
   },
-  {
-    title: "Agile Project Management",
-    issuer: "Google",
-    year: "2021",
-    link: "#",
-    preview: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
-    category: "Course",
-    technologies: ["Agile", "Scrum", "Kanban"],
-    details: "Covered Agile methodology, Scrum framework, Kanban practices, and project management principles.",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
-  },
-  {
-    title: "Next.js Masterclass",
-    issuer: "Udemy",
-    year: "2024",
-    link: "#",
-    preview: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop",
-    category: "Course",
-    technologies: ["Next.js", "React", "Node.js"],
-    details: "Advanced Next.js features including SSR, SSG, API routes, image optimization, and deployment.",
-    logo: "https://logos-download.com/wp-content/uploads/2016/09/Udemy_logo.png"
-  }
-  ,
+
 
   //end of EDX
 
@@ -388,7 +366,7 @@ const certificationsData = [
     "link": "/Certificates/NPTEL/ProgramminginJava.jpg",
     "preview": "/Certificates/NPTEL/ProgramminginJava.jpg",
     "category": "Course",
-    "technologies": ["Java", "Object-Oriented Programming"],
+    "technologies": ["Java", "OOPS"],
     "details": "Teaches programming in Java, including OOP concepts, data structures, and exception handling.",
     "logo": "https://nptel.ac.in/_app/immutable/assets/logo-m.CNHeS_sM.jpg"
   }
@@ -410,61 +388,6 @@ const certificationsData = [
     "logo": "data:image/webp;base64,UklGRtAEAABXRUJQVlA4WAoAAAAQAAAAMwAAMwAAQUxQSHABAAARkGTbtmlJO2w1wbZt22bNpRjRB9sRmVnKkX2ws2Tbtp357gm+f++5HYiICYBEu/CetVOPvxni+9Oz+wZj7MEwdvqhINPi2XKqItuqsyT1YoOdgoTTJP1CtiyXif+k0FjzlOJ7gRTfCpeQ/paUfy6zqPArMfxVY0H6V2L5q9yUz1ti+iXShMt5YnvHa7dxYrxnl7h/nETeDjYnifUl+20lghe1bTtBzK9aAeHEPhMY5bcPtnf4vXIKNPhRUjdpODyrw/5DOly4qcPbNzoYX3QgPd7qYNzU4e1BHc7P6XCgW4ehgP8aJNrc5vfKCSP89gJhgl0mgGPcrlgDKBbM2gDA+hivi3bbEPufVS52HuG0D7u6nONzy2s3eL/m8jkcZtO+8vhVCvP5Xzn8qoKlaW/UfSqF5T4XVN0Kg0yXCUOFWPOA5LhTQtq5LMi3rjgj53yrHdRGTz0Q5sSzxSQwtAvrWTn56Jshvj85vac/ygESAVZQOCA6AwAAMBIAnQEqNAA0AD6RKKRSJaGlpZQAsBIJbACxH99BR85yZ3QUM57sN54lvS78xnQ49AD+q/4DrQPQA8uL2Uv3M9GC6C47XuXEgOYHEyveaH5Hnz37AI8ymQVvz55B4ybnuxvdM7QBdGl5I0rP2TdjmGk6SWcMt0ph5sDKHvNSNa2GKstp+jvn/tYvAwdIaGd2/wCHQ0Stm9/bAAD+/xq77w5c1j723YkOtoPze45bx/EoxInGkxfbpaaRqP6p0oemWFa7oogk7PUar5j6wwSOXLM3zL/ilvJzQp2/8CrFbdrSZ/T8AbWS6Dzi935qqtr+klc9zgeS7ESV1TeuR+fkx3KIoneF7thxiBy9Asir0+aXOqw9m3tt9jfQH0f1RGgpc9k5dtg36vD/w5CjNVfQeYt7mU26IrPAApK7vR2l8TiY05OB1BnIV25nd4rEkJhY62h6hVmtIMicGBbvLBtJHNgfgOSibqe8f+VRjuRPxKlcHQ09Ye9Cl+syF0OA3LxQBusVpxfS92CmltVo7UVRa/dxtFS664+SCW6fRHVtYIXVYbxlwGPvCZYC6+hzKZWYzvjI2bP1XPNyxqrKY67sXLUf/K5USgdxMgz/Y/PptqHnJmSW7tFVmMA9uq9ss3dG7A6wsCpZWYePX7vEclZLIo+Tod/289s4lGuRk8X0Ir7BDbG5iNr+7QPlhnzhx+6qgk7bd66jEP6n5UUnRAzM9qZ/oC+eyrYo/yNDlXxGvz6Y8K0GshbBOCjEfl3b3lKz2Q0q64ctLoAjh/84c8tMzcVrb925oFHPy8Bnrwve5TE+HphbHHSjBetQTapZp77nE/eN/MrOVgNGBSrEmlNN52GlY8Ov51iP5MjNsARxPTvz6l9T9s2/aT75R5Ycdr7A28iBhrOY9NZzSBfiK+Rf1c3/E7vENeIxJlJdKQphynRU0NeUJTIRIltE/mLk+3Z5SezvYRu6JpVv5aak+eP4Ar6ObNlviTWhkw/8KGtARrTquYJt6ppDdSmEg7GY6DDZURBPMAuuO90ExLV1M8w9JS2VrWGfSOictGC54jKYELDK7cX1Z57X8NxU9UD68hq/49a6fDUAAAAAAA=="
   }
   ,
-
-  {
-    title: "UI/UX Design Specialization",
-    issuer: "Coursera",
-    year: "2022",
-    link: "#",
-    preview: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop",
-    category: "Specialization",
-    technologies: ["UI", "UX", "Prototyping"],
-    details: "Design systems, accessibility, user testing, and prototyping.",
-    logo: "https://about.coursera.org/static/ce/images/logos/coursera-logo-full-rgb.png"
-  },
-  {
-    title: "C# Fundamentals",
-    issuer: "Microsoft",
-    year: "2020",
-    link: "#",
-    preview: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
-    category: "Course",
-    technologies: ["C#", ".NET"],
-    details: "OOP, collections, LINQ, and .NET basics for application development.",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
-  },
-  {
-    title: "Docker Essentials",
-    issuer: "Pluralsight",
-    year: "2022",
-    link: "#",
-    preview: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
-    category: "Course",
-    technologies: ["Docker", "Containers"],
-    details: "Images, containers, volumes, networks, and Compose.",
-    logo: "https://www.pluralsight.com/etc/clientlibs/pluralsight/main/images/pluralsight-logo.png"
-  },
-  {
-    title: "GraphQL with Apollo",
-    issuer: "Udemy",
-    year: "2023",
-    link: "#",
-    preview: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop",
-    category: "Course",
-    technologies: ["GraphQL", "Apollo", "API"],
-    details: "Schemas, resolvers, queries/mutations, and client caching.",
-    logo: "https://logos-download.com/wp-content/uploads/2016/09/Udemy_logo.png"
-  },
-  {
-    title: "Data Analysis with Pandas",
-    issuer: "Kaggle",
-    year: "2021",
-    link: "#",
-    preview: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop",
-    category: "Workshop",
-    technologies: ["Python", "Pandas"],
-    details: "Cleaning, transforming, aggregating, and exploring data frames.",
-    logo: "https://www.kaggle.com/static/images/site-logo.png"
-  }
-];
+  //end of guvi
+ ];
 export default certificationsData;
