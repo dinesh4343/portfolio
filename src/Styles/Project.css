@@ -111,60 +111,114 @@
 .modal-details li::before { content: '✓'; color: var(--primary-color); font-weight: bold; }
 .modal-links { display: flex; gap: 1rem; margin-top: 2rem; }
 
-@media (max-width: 992px) {
-    .spotlight-container { grid-template-columns: 1fr; height: auto; max-height: none; }
-    .project-list-container { max-height: 250px; }
-    .modal-container { grid-template-columns: 1fr; height: 95vh; padding: 1rem; }
-    .modal-details { padding-right: 0.5rem; }
-}
+/* ====================================================== */
+/* ===      COMPLETE MOBILE REDESIGN (<= 768px)       === */
+/* ====================================================== */
 
 @media (max-width: 768px) {
-    /* ... (all your other mobile styles for the main page go here) ... */
-
-    /* --- NEW: Detailed Media Queries for the Pop-up Modal --- */
-    .modal-container {
-        /* Make the modal full screen on mobile for a better UX */
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        transform: none;
-        border-radius: 0;
-        
-        /* Stack the image and details vertically */
-        grid-template-columns: 1fr;
-        /* Give the image slider a fixed portion of the height */
-        grid-template-rows: 45% 1fr; 
-        padding: 1rem;
-        gap: 1rem;
+    .spotlight-projects-section {
+        padding: 4rem 1rem;
     }
 
-    .modal-close-btn {
-        top: 1rem;
-        right: 1rem;
-        /* Make it easier to tap on mobile */
-        width: 44px;
-        height: 44px;
+    /* --- 1. Redesign the Main Container --- */
+    .spotlight-container {
+        display: flex;
+        /* SWAPPED: This reverses the order, showing the list first */
+        flex-direction: column-reverse; 
+        
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        height: auto;
+        max-height: none;
+    }
+
+    /* --- 2. Style the Featured Project as the "Bottom Card" --- */
+    .featured-project {
+        background-color: var(--bg-color-medium);
+        border-radius: 12px;
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+        /* Use margin-top now since it's at the bottom */
+        margin-top: 2.5rem; 
+    }
+
+    .featured-image-container {
+        margin-bottom: 1rem;
+    }
+    
+    .featured-content .project-title {
         font-size: 1.75rem;
     }
 
-    .modal-slider-container {
-        /* Prevents flexbox sizing issues within a grid layout */
-        min-height: 0;
+    .featured-content .project-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
 
-    .modal-details {
-        /* Allow only the details section to scroll if content is long */
-        overflow-y: auto;
-        padding-right: 0.5rem; /* Space for the scrollbar */
-        min-height: 0;
+    .featured-links {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
     }
 
-    .modal-details h2 {
-        font-size: 2rem;
+    .btn {
+        width: 100%;
+        padding: 0.8rem;
+        justify-content: center;
+    }
+
+    /* --- 3. Redesign the Project List (Now at the top) --- */
+    .project-list-container {
+        padding-right: 0;
     }
     
-    .modal-thumbnails {
-        height: 70px; /* Make thumbnails a bit smaller on mobile */
+    .project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .active-project-indicator {
+        display: none;
+    }
+
+    /* --- 4. Redesign the Project Preview Cards --- */
+    .project-preview-card {
+        background-color: var(--bg-color-medium);
+        padding: 1.25rem 1rem;
+        margin-bottom: 0;
+        border: 1px solid transparent;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    
+    .project-preview-card::before {
+        display: none;
+    }
+
+    .project-preview-card:hover {
+        transform: translateY(-2px);
+        background-color: var(--bg-color-light);
+    }
+    
+    .project-preview-card h3 {
+        font-size: 1.2rem;
+        color: var(--text-color-light);
+    }
+    
+    .project-preview-card p {
+        font-size: 0.9rem;
+        color: var(--text-color-dark);
+    }
+    
+    .project-preview-card.active {
+        background-color: var(--bg-color-light);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+    }
+    
+    .project-preview-card.active h3 {
+        color: var(--text-color-light);
     }
 }
