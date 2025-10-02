@@ -18,6 +18,36 @@ export default function App() {
     const charIndex = useRef(0);
     const isDeleting = useRef(false);
 
+       const [buttonState, setButtonState] = useState('idle');
+
+
+ const handleClick = () => {
+    // 1. Don't do anything if a process is already running
+    if (buttonState !== 'idle') return;
+
+    // 2. Set the state to 'loading' to start the animation
+    setButtonState('loading');
+
+    // 3. Create a link and click it to start the actual download
+    const link = document.createElement('a');
+    link.href = '/Resume/resume.pdf'; // Make sure your PDF is in the /public folder
+    link.download = 'Dinesh_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // 4. Set state to 'success' almost immediately
+    //    The short delay gives the UI time to show the loading animation gracefully.
+    setTimeout(() => {
+      setButtonState('success');
+
+      // 5. Reset the button back to idle after showing the success message
+      setTimeout(() => {
+        setButtonState('idle');
+      }, 2000); // Show success for 2 seconds
+    }, 400); // A short delay for a smooth animation transition
+  };
+
     useEffect(() => {
         // A reference to the timeout to clear it on component unmount
         let timeoutId;
@@ -87,6 +117,28 @@ export default function App() {
                             <p className='text-contnt'> <MdSchool /> Graduate on 2025</p>
                             <p className='text-contnt'> <FaBookOpen /> B Tech (Bachelor of Technology)</p>
                             <p className='text-contnt'><span></span><FaHome /> Chennai</p>
+                                <button
+      className={`download-button ${buttonState}`}
+      onClick={handleClick}
+    >
+      {/* Idle State Content */}
+
+      <span className="button-content idle-content">
+        <span className="button-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3V15M12 15L16 11M12 15L8 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3 17V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </span>
+        <span className="button-text">Download CV</span>
+      </span>
+      
+      {/* Loading/Success State Content */}
+      <span className="button-content loading-content">
+        <span className="button-loader"></span> {/* Changed class name here */}
+      </span>
+      
+    </button>
                         </div>
 
                         {/* Right Side: Image with Custom Blob Shape */}

@@ -35,7 +35,13 @@ export default function EducationExperience() {
       details: "Developing a smart e-ticketing system for Chennai MTC buses, integrating seamless user booking, digital payments, and admin dashboards with scalable full-stack architecture.",
       link: "https://dinesh4343.github.io/TICKET_ZONE/"
     },
-    { title: "Open Source Contributor", org: "GitHub", period: "2021 – 2022", details: "Bug fixes, docs, small features" }
+    {
+  "title": "Open Source Contributor",
+  "org": "GitHub",
+  "period": "2021 – 2022",
+  "details": "Authored and maintained several open-source projects including a real-time chat and translation app (Trantigram), a smart bus ticketing system (TICKET_ZONE), and a full-stack e-commerce website.",
+  "link": "https://github.com/dinesh4343"
+}
   ];
 
   const [activeTab, setActiveTab] = useState("education");
@@ -43,6 +49,7 @@ export default function EducationExperience() {
   const tabs = [
     { key: "education", label: "Education", data: education },
     { key: "experience", label: "Experience", data: experience }
+    
   ];
 
   const activeData = tabs.find(t => t.key === activeTab)?.data ?? [];
